@@ -6,7 +6,7 @@ TEST(TBitField, can_create_bitfield_with_positive_length)
 {
   ASSERT_NO_THROW(TBitField bf(3));
 }
-TEST(TBitField, using_the_copy_constructor)
+TEST(TBitField, using_the_copy_constructor_)
 {
     TBitField bf(10);
     bf.SetBit(2);
@@ -16,7 +16,7 @@ TEST(TBitField, using_the_copy_constructor)
     for (int i = 0; i < tmp.GetLength(); i++)
     {
         sum += tmp.GetBit(i);
-       // std::cout << bf.GetBit(i) << " " << tmp.GetBit(i) << std::endl;
+       
     }
     EXPECT_EQ(2, sum);
 }

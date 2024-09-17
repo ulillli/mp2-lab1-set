@@ -10,7 +10,6 @@
 TSet::TSet(int mp) : BitField(mp)
 {
     MaxPower = mp;
-
 }
 
 // конструктор копирования

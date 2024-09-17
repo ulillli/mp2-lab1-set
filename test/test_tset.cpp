@@ -197,14 +197,14 @@ TEST(TSet, compare_two_sets_not_equal_sizes_and_different_members) {
 	set1.InsElem(1);
 	set1.InsElem(4);
 	set1.InsElem(6);
-	// set1 = {1, 4, 6}
+	// set1 = {1,4,6}
 	set2.InsElem(0);
 	set2.InsElem(3);
 	set2.InsElem(9);
 	set2.InsElem(7);
-	// set2 = {0, 3, 7,9}
+	// set2 = {0,3,7,9}
 	TSet set3(set1 + set2);
-	// set3 = {0, 1, 3,4,6,7,9}
+	// set3 = {0,1,3,4,6,7,9}
 
 	TSet result(size2);
 	for (int i = 0; i < size2; i++) {
