@@ -26,7 +26,6 @@ TEST(TSet, can_insert_existing_element)
   TSet set(size);
   set.InsElem(k);
   set.InsElem(k);
-
   EXPECT_NE(set.IsMember(k), 0);
 }
 
@@ -55,7 +54,6 @@ TEST(TSet, compare_two_sets_of_non_equal_sizes)
 {
   const int size1 = 4, size2 = 6;
   TSet set1(size1), set2(size2);
-
   EXPECT_EQ(1, set1 != set2);
 }
 
@@ -68,7 +66,6 @@ TEST(TSet, compare_two_equal_sets)
   set1.InsElem(3);
   set2.InsElem(1);
   set2.InsElem(3);
-
   EXPECT_EQ(set1, set2);
 }
 
@@ -82,7 +79,6 @@ TEST(TSet, compare_two_non_equal_sets)
   // set2 = {1, 2}
   set2.InsElem(1);
   set2.InsElem(2);
-
   EXPECT_EQ(1, set1 != set2);
 }
 
@@ -142,7 +138,7 @@ TEST(TSet, throws_when_insert_non_existing_element_out_of_range_using_plus_opera
   TSet set(size), updatedSet(size);
   set.InsElem(0);
   set.InsElem(2);
-
+  //std::cout << set;
   ASSERT_ANY_THROW(updatedSet = set + k);
 }
 
@@ -154,7 +150,6 @@ TEST(TSet, can_insert_existing_element_using_plus_operator)
   set.InsElem(0);
   set.InsElem(k);
   updatedSet = set + k;
-
   EXPECT_NE(0, set.IsMember(k));
 }
 
@@ -171,7 +166,7 @@ TEST(TSet, check_size_of_the_combination_of_two_sets_of_equal_size)
   set2.InsElem(1);
   set2.InsElem(2);
   set3 = set1 + set2;
-
+  
   EXPECT_EQ(size, set3.GetMaxPower());
 }
 
@@ -196,7 +191,28 @@ TEST(TSet, can_combine_two_sets_of_equal_size)
 
   EXPECT_EQ(expSet, set3);
 }
+TEST(TSet, compare_two_sets_not_equal_sizes_and_different_members) {
+	const int size1 = 8, size2 = 10;
+	TSet set1(size1), set2(size2);
+	set1.InsElem(1);
+	set1.InsElem(4);
+	set1.InsElem(6);
+	// set1 = {1, 4, 6}
+	set2.InsElem(0);
+	set2.InsElem(3);
+	set2.InsElem(9);
+	set2.InsElem(7);
+	// set2 = {0, 3, 7,9}
+	TSet set3(set1 + set2);
+	// set3 = {0, 1, 3,4,6,7,9}
 
+	TSet result(size2);
+	for (int i = 0; i < size2; i++) {
+		if((i!=2)&&(i!=5)&&(i!=8)) result.InsElem(i);
+	}
+	
+	EXPECT_EQ(set3, result);
+}
 TEST(TSet, check_size_changes_of_the_combination_of_two_sets_of_non_equal_size)
 {
   const int size1 = 5, size2 = 7;
@@ -209,6 +225,7 @@ TEST(TSet, check_size_changes_of_the_combination_of_two_sets_of_non_equal_size)
   set2.InsElem(0);
   set2.InsElem(1);
   set2.InsElem(2);
+  
   set3 = set1 + set2;
 
   EXPECT_EQ(size2, set3.GetMaxPower());

@@ -6,6 +6,20 @@ TEST(TBitField, can_create_bitfield_with_positive_length)
 {
   ASSERT_NO_THROW(TBitField bf(3));
 }
+TEST(TBitField, using_the_copy_constructor)
+{
+    TBitField bf(10);
+    bf.SetBit(2);
+    bf.SetBit(6);
+    TBitField tmp(bf);
+    int sum = 0;
+    for (int i = 0; i < tmp.GetLength(); i++)
+    {
+        sum += tmp.GetBit(i);
+       // std::cout << bf.GetBit(i) << " " << tmp.GetBit(i) << std::endl;
+    }
+    EXPECT_EQ(2, sum);
+}
 
 TEST(TBitField, can_get_length)
 {
@@ -17,7 +31,6 @@ TEST(TBitField, can_get_length)
 TEST(TBitField, new_bitfield_is_set_to_zero)
 {
   TBitField bf(100);
-
   int sum = 0;
   for (int i = 0; i < bf.GetLength(); i++)
   {
@@ -230,7 +243,6 @@ TEST(TBitField, can_invert_bitfield)
   // bf = 01
   bf.SetBit(1);
   negBf = ~bf;
-
   // expNegBf = 10
   expNegBf.SetBit(0);
 
@@ -241,10 +253,11 @@ TEST(TBitField, can_invert_large_bitfield)
 {
   const int size = 38;
   TBitField bf(size), negBf(size), expNegBf(size);
+ 
   bf.SetBit(35);
   negBf = ~bf;
 
-  for(int i = 0; i < size; i++)
+  for(int i = 0; i < 38; i++)
     expNegBf.SetBit(i);
   expNegBf.ClrBit(35);
 
@@ -263,10 +276,8 @@ TEST(TBitField, invert_plus_and_operator_on_different_size_bitfield)
   // secondBf = 00011000
   secondBf.SetBit(3);
   secondBf.SetBit(4);
-
   // testBf = 00001000
   testBf.SetBit(3);
-
   EXPECT_EQ(secondBf & negFirstBf, testBf);
 }
 
