@@ -53,8 +53,9 @@ TELEM TBitField::GetMemMask(const int n) const // битовая маска дл
 {
    TELEM tmp=0;
     if ((n < BitLen)&&(0<=n)) {
-        tmp = (1 << sizeof(TELEM)*8-n%(sizeof(TELEM) * 8) - 1);
-
+        int t = (sizeTelem - n % sizeTelem - 1);
+        tmp = (one << t);
+        //std::cout << tmp;
     }
     else throw "Index out of range\n";
     return tmp;
